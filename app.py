@@ -80,10 +80,7 @@ if 'qa_chain' in locals():
     if question:
         st.info("Querying the document...")
         st.write("Expected input keys:", qa_chain.input_keys)
-        answer = qa_chain.invoke({
-            "question": question,
-            "input_documents": []
-        })
+        answer = qa_chain.invoke({"query": question})
         st.success(f"Answer: {answer}")
 
 
