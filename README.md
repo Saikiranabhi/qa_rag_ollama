@@ -1,4 +1,4 @@
-# 🟢🟢🟢 RAG Chatbot with FAISS, LangChain, and LLaMA 🟢🟢🟢
+#  RAG Chatbot with FAISS, LangChain, and LLaMA
 
 A Retrieval-Augmented Generation (RAG) chatbot that allows users to upload PDF documents and interactively ask questions about their content. The system leverages state-of-the-art language models, vector search, and modern web technologies to provide accurate, context-aware answers from your documents.
 
