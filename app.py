@@ -79,7 +79,7 @@ if 'qa_chain' in locals():
     question = st.text_input("Ask a question about the uploaded PDF:")
     if question:
         st.info("Querying the document...")
-        answer = qa_chain.run(question)
+        answer = qa_chain.invoke({"query": question})
         st.success(f"Answer: {answer}")
 
 
