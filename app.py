@@ -1,11 +1,11 @@
 import streamlit as st
 import os
 from PyPDF2 import PdfReader
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.vectorstores import FAISS
+from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
-from langchain.llms import Ollama
+from langchain_community.llms import Ollama
 from langchain.chains.question_answering import load_qa_chain
 
 
@@ -79,11 +79,7 @@ if 'qa_chain' in locals():
     question = st.text_input("Ask a question about the uploaded PDF:")
     if question:
         st.info("Querying the document...")
-        st.write("Expected input keys:", qa_chain.input_keys)
-        answer = qa_chain.invoke({
-    "question": question,
-    "input_documents": []
-})
+        answer = qa_chain.invoke({"query": question})
         st.success(f"Answer: {answer}")
 
 
