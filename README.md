@@ -64,6 +64,37 @@ RAG/
 
 ---
 
+## 🦙 Ollama Setup (Required for LLaMA Model)
+
+This project uses [Ollama](https://ollama.com/) to run the LLaMA language model locally. **You must install and run Ollama, and pull the required model before using the chatbot.**
+
+### 1. Install Ollama
+- Download and install Ollama from: [https://ollama.com/download](https://ollama.com/download)
+- Follow the installation instructions for your operating system (Windows, macOS, or Linux).
+
+### 2. Start the Ollama Server
+Open a terminal and run:
+```sh
+ollama serve
+```
+This will start the Ollama server locally.
+
+### 3. Pull the Required Model
+The chatbot requires the `llama3:instruct` model. Download it by running:
+```sh
+ollama pull llama3:instruct
+```
+Wait for the download to complete. You can check available models with:
+```sh
+ollama list
+```
+
+### 4. Troubleshooting
+- If you see an error like `OllamaEndpointNotFoundError` or `status code 404`, it means the model is not found. Make sure you have pulled the model as shown above.
+- Ensure the Ollama server is running before starting the Streamlit app.
+
+---
+
 ## 📝 Example Usage
 1. Upload a PDF file using the sidebar.
 2. Wait for the system to process and index the document.
@@ -103,4 +134,7 @@ PyPDF2
 langchain
 faiss-cpu
 sentence-transformers
-``` 
+```
+
+**System Dependency:**
+- [Ollama](https://ollama.com/) (for running LLaMA models locally) 
