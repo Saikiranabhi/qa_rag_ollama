@@ -104,8 +104,8 @@ ollama list
 ---
 
 ## 🔗 Links
-- **GitHub Repository:** [https://github.com/yourusername/rag-chatbot](https://github.com/yourusername/rag-chatbot)
-- **Live Demo:** [https://your-demo-link.com](https://your-demo-link.com)
+- **GitHub Repository:** [https://github.com/Saikiranabhi/qa_rag_ollama.git]
+- **Live Demo:** [https://qa-rag-ollama.onrender.com/]
 
 ---
 
