@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+from io import BytesIO
 from PyPDF2 import PdfReader
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -48,6 +49,7 @@ def build_qa_chain(vector_store_path="faiss_index"):
 
 # ----------------------- Streamlit UI -----------------------
 
+
 st.set_page_config(page_title="RAG Chatbot", layout="centered")
 st.title("📄🧠 RAG Chatbot with FAISS + LLaMA")
 st.write("Upload a PDF and ask questions based on its content.")
@@ -56,24 +58,26 @@ st.write("Upload a PDF and ask questions based on its content.")
 uploaded_file = st.file_uploader("Upload your PDF file", type="pdf")
 
 if uploaded_file is not None:
-    # Save the uploaded PDF locally
-    os.makedirs("uploaded", exist_ok=True)
-    pdf_path = f"uploaded/{uploaded_file.name}"
-    with open(pdf_path, "wb") as f:
-        f.write(uploaded_file.getbuffer())
 
-    # Extract and process PDF
+    # Read file directly from memory
+    pdf_bytes = uploaded_file.read()
+    pdf_buffer = BytesIO(pdf_bytes)
+
+    # Extract and process PDF, no saving to disk
     st.info("Extracting text and creating vector store...")
-    text = extract_text_from_pdf(pdf_path)
+    text = extract_text_from_pdf(pdf_buffer)
+
+    # Directly create FAISS embeddings from extracted text
     create_faiss_vector_store(text)
-    
+
     # Load QA chain
     st.info("Initializing LLaMA chatbot...")
     qa_chain = build_qa_chain()
     st.success("✅ Chatbot is ready! Ask your question below.")
 
-    # Ask Question
+    # Ask question
     question = st.text_input("❓ Ask a question about the uploaded PDF:")
+    
     if question:
         st.info("🔍 Searching for the answer...")
         answer = qa_chain.invoke({"query": question})
